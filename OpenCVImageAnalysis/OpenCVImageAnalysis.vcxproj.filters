@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\convolutions">
+      <UniqueIdentifier>{d8fd7ca8-cb32-47e9-af9b-8ccec0c3de71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\convolutions">
+      <UniqueIdentifier>{c7f16621-0102-48cc-a43e-5e1fd73af75f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,16 +27,16 @@
     <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Convolutions.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="convolutions\Convolutions.cpp">
+      <Filter>Source Files\convolutions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Convolutions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="convolutions\Convolutions.h">
+      <Filter>Header Files\convolutions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

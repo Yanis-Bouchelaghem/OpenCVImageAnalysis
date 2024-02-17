@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include "utils.h"
-#include "Convolutions.h"
+#include "convolutions/Convolutions.h"
 
 int main()
 {

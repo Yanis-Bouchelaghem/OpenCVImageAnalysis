@@ -127,12 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Convolutions.cpp" />
+    <ClCompile Include="convolutions\Convolutions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Convolutions.h" />
+    <ClInclude Include="convolutions\Convolutions.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
