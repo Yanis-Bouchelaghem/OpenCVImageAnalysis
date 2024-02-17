@@ -1,4 +1,6 @@
 #include "Convolutions.h"
+#include <cmath>
+#include <opencv2/imgproc/imgproc.hpp>
 
 convolutions::MeanFilter::MeanFilter(int k)
 	:
@@ -34,4 +36,18 @@ int convolutions::MeanFilter::GetK() const
 int convolutions::MeanFilter::GetKernelSize() const
 {
     return kernelSize;
+}
+
+convolutions::GaussianFilter::GaussianFilter(int k, double sigmax, double sigmay)
+{
+    //Implementation for generating a gaussian filter of size k taken from :
+    //https://codereview.stackexchange.com/a/169675
+    auto gauss_x = cv::getGaussianKernel(k, sigmax, CV_32F);
+    auto gauss_y = cv::getGaussianKernel(k, sigmay, CV_32F);
+    kernel =  gauss_x * gauss_y.t();
+}
+
+const cv::Mat& convolutions::GaussianFilter::GetKernel() const
+{
+    return kernel;
 }

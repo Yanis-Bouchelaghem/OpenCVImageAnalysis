@@ -41,4 +41,13 @@ namespace convolutions
 		const int kernelSize;
 	};
 
+	class GaussianFilter
+	{
+	public:
+		GaussianFilter(int k, double sigmax, double sigmay);
+		const cv::Mat& GetKernel() const;
+	private:
+		cv::Mat kernel;
+
+	};
 }
