@@ -45,11 +45,15 @@ namespace convolutions
 	{
 	public:
 		GaussianFilter(int k, double sigmaX = 1, double sigmaY = 1);
+		int GetK() const;
+		int GetKernelSize() const;
 		const cv::Mat& GetKernel() const;
-
+		uchar operator()(const cv::Mat& inputImage, int y, int x);
 		static cv::Mat GenerateGaussianMatrix(int k, double sigmaX, double sigmaY);
 	
 	private:
 		const cv::Mat kernel;
+		const int k;
+		const int kernelSize;
 	};
 }

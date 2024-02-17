@@ -11,17 +11,18 @@ convolutions::MeanFilter::MeanFilter(int k)
 
 uchar convolutions::MeanFilter::operator()(const cv::Mat& inputImage, int y, int x)
 {
-    //Calculate the mean of the surrounding pixels
+    //Calculate the area of the image over which the kernel will be applied
     const int topleftX = x - k;
     const int topleftY = y - k;
     const int bottomrightX = x + k;
     const int bottomrightY = y + k;
+    //Calculate the mean of the surrounding pixels
     float sum = 0.f;
-    for (int kernelX = topleftX; kernelX <= bottomrightX; ++kernelX)
+    for (int x = topleftX; x < bottomrightX; ++x)
     {
-        for (int kernelY = topleftY; kernelY <= bottomrightY; ++kernelY)
+        for (int y = topleftY; y < bottomrightY; ++y)
         {
-            sum += inputImage.at<uchar>(kernelY, kernelX);
+            sum += inputImage.at<uchar>(y, x);
         }
     }
     float mean = sum / (kernelSize * kernelSize);
@@ -40,13 +41,44 @@ int convolutions::MeanFilter::GetKernelSize() const
 
 convolutions::GaussianFilter::GaussianFilter(int k, double sigmaX, double sigmaY)
     :
-    kernel(GenerateGaussianMatrix(k, sigmaX, sigmaY))
+    kernel(GenerateGaussianMatrix(2 * k + 1, sigmaX, sigmaY)),
+    k(k),
+    kernelSize(2 * k + 1)
 {
+}
+
+int convolutions::GaussianFilter::GetK() const
+{
+    return k;
+}
+
+int convolutions::GaussianFilter::GetKernelSize() const
+{
+    return kernelSize;
 }
 
 const cv::Mat& convolutions::GaussianFilter::GetKernel() const
 {
     return kernel;
+}
+
+uchar convolutions::GaussianFilter::operator()(const cv::Mat& inputImage, int y, int x)
+{
+    //Calculate the area of the image over which the kernel will be applied
+    const int topleftX = x - k;
+    const int topleftY = y - k;
+    const int bottomrightX = x + k;
+    const int bottomrightY = y + k;
+    //Calculate the convolution with the gaussian filter
+    float mean = 0.f;
+    for (int imageX = topleftX; imageX <= bottomrightX; ++imageX)
+    {
+        for (int imageY = topleftY; imageY <= bottomrightY; ++imageY)
+        {
+            mean += inputImage.at<uchar>(imageY, imageX) * kernel.at<float>(imageY - topleftY, imageX - topleftX);
+        }
+    }
+    return static_cast<uchar>(mean);
 }
 
 cv::Mat convolutions::GaussianFilter::GenerateGaussianMatrix(int k, double sigmaX, double sigmaY)

@@ -29,8 +29,9 @@ int main()
 	convolutions::MeanFilter meanFilter(5);
 	cv::imshow("mean filter applied on cat", convolutions::SlideWindow(imageGrayscale, meanFilter));
 
-	convolutions::GaussianFilter gaussianFilter(5, 1, 1);
+	convolutions::GaussianFilter gaussianFilter(3, 1, 1);
 	cv::Mat kernel = gaussianFilter.GetKernel();
+	cv::imshow("Gaussian filter applied on cat", convolutions::SlideWindow(imageGrayscale, gaussianFilter));
 	for (int x = 0; x < kernel.cols; ++x)
 	{
 		for (int y = 0; y < kernel.rows; ++y)
