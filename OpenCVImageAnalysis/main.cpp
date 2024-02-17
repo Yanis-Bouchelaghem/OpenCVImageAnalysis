@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "utils.h"
+#include "Convolutions.h"
 
 int main()
 {
@@ -24,5 +25,6 @@ int main()
 	// Display the image
 	cv::imshow("Grayscale cat", imageGrayscale);
 	cv::imshow("BGR cat", imageBGR);
+	cv::imshow("Bordered image", convolutions::BorderPadding(imageGrayscale, 50));
 	int key = cv::waitKey(0);
 }
