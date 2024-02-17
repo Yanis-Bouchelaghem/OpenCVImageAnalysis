@@ -7,11 +7,13 @@
 
 int main()
 {
-	cv::Mat image;
+	cv::Mat imageGrayscale;
+	cv::Mat imageBGR;
 	// load a cat image in grayscale
 	try
 	{
-		image = utils::LoadImage("images/cat.jpg", cv::IMREAD_GRAYSCALE);
+		imageGrayscale = utils::LoadImage("images/cat.jpg", cv::IMREAD_GRAYSCALE);
+		imageBGR = utils::LoadImage("images/cat.jpg", cv::IMREAD_COLOR);
 	}
 	catch (cv::Exception)
 	{
@@ -20,6 +22,7 @@ int main()
 	}
 
 	// Display the image
-	cv::imshow("Grayscale cat", image);
+	cv::imshow("Grayscale cat", imageGrayscale);
+	cv::imshow("BGR cat", imageBGR);
 	int key = cv::waitKey(0);
 }
