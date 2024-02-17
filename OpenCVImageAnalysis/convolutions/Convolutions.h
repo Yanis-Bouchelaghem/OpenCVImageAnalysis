@@ -44,10 +44,12 @@ namespace convolutions
 	class GaussianFilter
 	{
 	public:
-		GaussianFilter(int k, double sigmax, double sigmay);
+		GaussianFilter(int k, double sigmaX = 1, double sigmaY = 1);
 		const cv::Mat& GetKernel() const;
-	private:
-		cv::Mat kernel;
 
+		static cv::Mat GenerateGaussianMatrix(int k, double sigmaX, double sigmaY);
+	
+	private:
+		const cv::Mat kernel;
 	};
 }

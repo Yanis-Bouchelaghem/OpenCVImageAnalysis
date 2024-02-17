@@ -38,16 +38,23 @@ int convolutions::MeanFilter::GetKernelSize() const
     return kernelSize;
 }
 
-convolutions::GaussianFilter::GaussianFilter(int k, double sigmax, double sigmay)
+convolutions::GaussianFilter::GaussianFilter(int k, double sigmaX, double sigmaY)
+    :
+    kernel(GenerateGaussianMatrix(k, sigmaX, sigmaY))
 {
-    //Implementation for generating a gaussian filter of size k taken from :
-    //https://codereview.stackexchange.com/a/169675
-    auto gauss_x = cv::getGaussianKernel(k, sigmax, CV_32F);
-    auto gauss_y = cv::getGaussianKernel(k, sigmay, CV_32F);
-    kernel =  gauss_x * gauss_y.t();
 }
 
 const cv::Mat& convolutions::GaussianFilter::GetKernel() const
 {
     return kernel;
 }
+
+cv::Mat convolutions::GaussianFilter::GenerateGaussianMatrix(int k, double sigmaX, double sigmaY)
+{
+    //Implementation for generating a gaussian matrix of size k taken from :
+    //https://codereview.stackexchange.com/a/169675
+    auto gauss_x = cv::getGaussianKernel(k, sigmaX, CV_32F);
+    auto gauss_y = cv::getGaussianKernel(k, sigmaY, CV_32F);
+    return gauss_x * gauss_y.t();
+}
+
