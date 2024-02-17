@@ -26,5 +26,6 @@ int main()
 	cv::imshow("Grayscale cat", imageGrayscale);
 	cv::imshow("BGR cat", imageBGR);
 	cv::imshow("Bordered image", convolutions::BorderPadding(imageGrayscale, 50));
+	cv::imshow("mean filter applied on cat", convolutions::MeanFilter(imageGrayscale, 4));
 	int key = cv::waitKey(0);
 }
