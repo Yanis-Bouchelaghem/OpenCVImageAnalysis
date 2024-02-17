@@ -3,6 +3,7 @@
 #include <opencv2/highgui.hpp>
 #include <string>
 #include <iostream>
+#include "utils.h"
 
 int main()
 {
@@ -10,8 +11,7 @@ int main()
 	// load a cat image in grayscale
 	try
 	{
-		std::string imagePath = cv::samples::findFile("images/cat.jpg", true);
-		image = cv::imread( imagePath, cv::IMREAD_GRAYSCALE);
+		image = utils::LoadImage("images/cat.jpg", cv::IMREAD_GRAYSCALE);
 	}
 	catch (cv::Exception)
 	{
