@@ -14,7 +14,6 @@ int main()
 	try
 	{
 		imageGrayscale = utils::LoadImage("images/cat.jpg", cv::IMREAD_GRAYSCALE);
-		imageBGR = utils::LoadImage("images/cat.jpg", cv::IMREAD_COLOR);
 	}
 	catch (cv::Exception)
 	{
@@ -24,11 +23,10 @@ int main()
 
 	// Display the image
 	cv::imshow("Grayscale cat", imageGrayscale);
-	cv::imshow("BGR cat", imageBGR);
 	cv::imshow("Bordered image", utils::BorderPadding(imageGrayscale, 50));
 
 	// Apply a mean filter on the grayscale cat image.
 	convolutions::MeanFilter meanFilter(5);
-	cv::imshow("mean filter applied on cat", convolutions::Convolve(imageGrayscale, meanFilter));
+	cv::imshow("mean filter applied on cat", convolutions::SlideWindow(imageGrayscale, meanFilter));
 	int key = cv::waitKey(0);
 }

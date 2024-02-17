@@ -5,25 +5,27 @@
 
 namespace convolutions
 {
-	// A generic function that can convolve any given filter on a grayscale image.
+	// A generic function that can apply any given filter on a grayscale image.
 	// The filter must implement 'GetK()', 'GetKernelSize()', and the () operator.
 	template<class Filter>
-	cv::Mat Convolve(const cv::Mat& inputImage, Filter filter)
+	cv::Mat SlideWindow(const cv::Mat& inputImage, Filter filter)
 	{
         assert(inputImage.dims == 2); //If assertion triggers : Input is not a 2D image.
-		int k = filter.GetK();
-        cv::Mat paddedImage = utils::BorderPadding(inputImage, k);
+		const int k = filter.GetK();
         const int kernelSize = filter.GetKernelSize();
-        //go through every pixel of the image
+		//Add the necessary padding to the image.
+        cv::Mat paddedImage = utils::BorderPadding(inputImage, k); 
+        //Go through every pixel of the image (ignoring the padding).
         for (int x = k; x < paddedImage.cols - k; ++x)
         {
             for (int y = k; y < paddedImage.rows - k; ++y)
             {
-				//Apply the filter on the pixel
+				//Apply the filter on the pixel.
                 paddedImage.at<uchar>(y, x) = filter(paddedImage, y, x);
             }
         }
-        return paddedImage;
+		//Remove the padding from the image
+        return utils::RemoveBorder(paddedImage, k);
 	}
 
 
@@ -38,4 +40,5 @@ namespace convolutions
 		const int k;
 		const int kernelSize;
 	};
+
 }

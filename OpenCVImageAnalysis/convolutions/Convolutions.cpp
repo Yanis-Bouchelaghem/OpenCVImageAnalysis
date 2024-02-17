@@ -9,7 +9,7 @@ convolutions::MeanFilter::MeanFilter(int k)
 
 uchar convolutions::MeanFilter::operator()(const cv::Mat& inputImage, int y, int x)
 {
-    //Calculate the mean of the k surrounding pixels
+    //Calculate the mean of the surrounding pixels
     const int topleftX = x - k;
     const int topleftY = y - k;
     const int bottomrightX = x + k;
