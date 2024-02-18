@@ -130,10 +130,12 @@
   <ItemGroup>
     <ClCompile Include="convolutions\Convolutions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="transformations\transformations.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="convolutions\Convolutions.h" />
+    <ClInclude Include="transformations\transformations.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
