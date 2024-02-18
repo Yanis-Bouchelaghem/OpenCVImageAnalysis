@@ -56,4 +56,17 @@ namespace convolutions
 		const int k;
 		const int kernelSize;
 	};
+
+	class MedianFilter
+	{
+	public:
+		MedianFilter(int k);
+		int GetK() const;
+		int GetKernelSize() const;
+		uchar operator()(const cv::Mat& inputImage, int y, int x);
+	private:
+		const int k;
+		const int kernelSize;
+
+	};
 }

@@ -90,3 +90,50 @@ cv::Mat convolutions::GaussianFilter::GenerateGaussianMatrix(int k, double sigma
     return gauss_x * gauss_y.t();
 }
 
+convolutions::MedianFilter::MedianFilter(int k)
+    :
+    k(k),
+    kernelSize(k*2 + 1)
+{
+}
+
+int convolutions::MedianFilter::GetK() const
+{
+    return k;
+}
+
+int convolutions::MedianFilter::GetKernelSize() const
+{
+    return kernelSize;
+}
+
+uchar convolutions::MedianFilter::operator()(const cv::Mat& inputImage, int y, int x)
+{
+    //Calculate the area of the image over which the kernel will be applied
+    const int topleftX = x - k;
+    const int topleftY = y - k;
+    const int bottomrightX = x + k;
+    const int bottomrightY = y + k;
+    //Calculate the convolution with the gaussian filter
+    std::vector<uchar> pixels;
+    const int pixelCount = kernelSize * kernelSize;
+    pixels.reserve(pixelCount);
+    for (int imageX = topleftX; imageX <= bottomrightX; ++imageX)
+    {
+        for (int imageY = topleftY; imageY <= bottomrightY; ++imageY)
+        {
+            pixels.push_back(inputImage.at<uchar>(imageY, imageX));
+        }
+    }
+    std::sort(pixels.begin(), pixels.end());
+    
+    if (pixelCount % 2 == 0)
+    {
+        //pair length, we calculate the mean
+        return (pixels[pixelCount/2] + pixels[pixelCount/2 + 1]) / 2;
+    }
+    else
+    {
+        return pixels[std::round(pixelCount/2)];
+    }
+}
