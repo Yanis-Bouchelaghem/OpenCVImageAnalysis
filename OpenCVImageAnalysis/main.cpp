@@ -44,7 +44,8 @@ int main()
 
 	///////////////////// Transformations  /////////////////////
 	cv::imshow("Transposed image of a cat", transformations::Transpose(imageGrayscale));
-
+	cv::imshow("0.7 scale nearest neighbor on cat", transformations::NearestNeighbor(imageGrayscale, 0.7f));
+	cv::imshow("2 scale nearest neighbor on cat", transformations::NearestNeighbor(imageGrayscale, 2.0f));
 	int key = cv::waitKey(0);
 	return 0;
 }
